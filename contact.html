@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – RecipeHub</title>
+  <link rel="stylesheet" href="../cssFile/globalStyles.css">
+</head>
+<body>
+
+<nav>
+  <h3>🍽 RecipeHub</h3>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <ul id="navMenu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="cart.html" class="nav-cart-btn">🛒 <span class="cart-badge"></span></a></li>
+  </ul>
+</nav>
+
+<div class="page page-centered">
+  <div class="form-container">
+    <h2>Get in Touch 📬</h2>
+    <p class="form-sub">Have questions about a recipe or need help? We're here!</p>
+
+    <label>Your Name</label>
+    <input type="text" placeholder="John Doe">
+
+    <label>Email Address</label>
+    <input type="email" placeholder="you@email.com">
+
+    <label>Subject</label>
+    <select>
+      <option>General Inquiry</option>
+      <option>Recipe Request</option>
+      <option>Order Issue</option>
+      <option>Technical Support</option>
+      <option>Feedback</option>
+    </select>
+
+    <label>Message</label>
+    <textarea rows="5" placeholder="Write your message here..."></textarea>
+
+    <button class="submit-btn" onclick="submitForm('contact')">📨 Send Message</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<footer>© 2026 RecipeHub</footer>
+<script src="../jsFile/jsFunctions.js"></script>
+</body>
+</html>

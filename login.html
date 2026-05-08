@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – RecipeHub</title>
+  <link rel="stylesheet" href="../cssFile/globalStyles.css">
+</head>
+<body>
+
+<nav>
+  <h3>🍽 RecipeHub</h3>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <ul id="navMenu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html">Register</a></li>
+  </ul>
+</nav>
+
+<div class="page page-centered">
+  <div class="form-container">
+    <h2>Welcome Back 👋</h2>
+    <p class="form-sub">Sign in to your RecipeHub account</p>
+
+    <label>Email Address</label>
+    <input id="login-email" type="email" placeholder="you@email.com">
+
+    <label>Password</label>
+    <input id="login-pass" type="password" placeholder="••••••••">
+
+    <div class="login-options-row">
+      <label class="remember-label">
+        <input type="checkbox" class="checkbox"> Remember me
+      </label>
+      <a href="#" class="forgot-link">Forgot password?</a>
+    </div>
+
+    <button class="submit-btn" onclick="submitForm('login')">🔐 Sign In</button>
+
+    <div class="divider">or continue with</div>
+
+    <button class="social-btn" onclick="showToast('Google login coming soon!')">
+      🌐 Sign in with Google
+    </button>
+
+    <div class="form-link">
+      Don't have an account? <a href="register.html">Create one →</a>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<footer>© 2026 RecipeHub</footer>
+<script src="../jsFile/jsFunctions.js"></script>
+</body>
+</html>

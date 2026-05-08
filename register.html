@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register – RecipeHub</title>
+  <link rel="stylesheet" href="../cssFile/globalStyles.css">
+</head>
+<body>
+
+<nav>
+  <h3>🍽 RecipeHub</h3>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <ul id="navMenu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html">Register</a></li>
+  </ul>
+</nav>
+
+<div class="page page-centered">
+  <div class="form-container form-container-lg">
+    <h2>Create Account 🍽️</h2>
+    <p class="form-sub">Join RecipeHub and start exploring amazing recipes!</p>
+
+    <div class="form-row">
+      <div>
+        <label>First Name</label>
+        <input type="text" placeholder="John">
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input type="text" placeholder="Doe">
+      </div>
+    </div>
+
+    <label>Full Name</label>
+    <input id="reg-name" type="text" placeholder="John Doe">
+
+    <label>Email Address</label>
+    <input id="reg-email" type="email" placeholder="you@email.com">
+
+    <label>Phone Number</label>
+    <input type="tel" placeholder="+1 234 567 8900">
+
+    <div class="form-row">
+      <div>
+        <label>Password</label>
+        <input id="reg-pass" type="password" placeholder="Min. 8 characters">
+      </div>
+      <div>
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Repeat password">
+      </div>
+    </div>
+
+    <label>I am a</label>
+    <select>
+      <option value="">Select Role</option>
+      <option>Food Lover</option>
+      <option>Home Cook</option>
+      <option>Professional Chef</option>
+      <option>Restaurant Owner</option>
+    </select>
+
+    <div class="terms-row">
+      <input type="checkbox" id="terms" class="checkbox">
+      <label for="terms" class="terms-label">
+        I agree to the
+        <a href="#" class="inline-link">Terms of Service</a>
+        and
+        <a href="#" class="inline-link">Privacy Policy</a>
+      </label>
+    </div>
+
+    <button class="submit-btn" onclick="submitForm('register')">🚀 Create My Account</button>
+
+    <div class="divider">or sign up with</div>
+
+    <button class="social-btn" onclick="showToast('Google signup coming soon!')">
+      🌐 Sign up with Google
+    </button>
+
+    <div class="form-link">
+      Already have an account? <a href="login.html">Sign In →</a>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<footer>© 2026 RecipeHub</footer>
+<script src="../jsFile/jsFunctions.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecipeHub – Discover & Order Recipes</title>
+  <link rel="stylesheet" href="cssFile/globalStyles.css">
+</head>
+<body>
+
+<nav>
+  <h3>🍽 RecipeHub</h3>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <ul id="navMenu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pages/dashboard.html">Dashboard</a></li>
+    <li><a href="pages/recipes.html">Recipes</a></li>
+    <li><a href="pages/contact.html">Contact</a></li>
+    <li><a href="pages/login.html">Login</a></li>
+    <li><a href="pages/cart.html" class="nav-cart-btn">🛒 <span class="cart-badge"></span></a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <h1>Discover & Order Recipes 🍛</h1>
+  <p>Explore hundreds of delicious dishes — view ingredients, steps, and order online.</p>
+</div>
+
+<div class="search-wrapper">
+  <div class="search-section">
+    <h3>🔍 Search Recipes</h3>
+    <div class="search-row">
+      <div class="search-field">
+        <label>Recipe Name</label>
+        <input id="search-name" type="text" placeholder="e.g. Biryani..." oninput="filterRecipes()">
+      </div>
+      <div class="search-field">
+        <label>Category</label>
+        <select id="search-cat" onchange="filterRecipes()">
+          <option value="">All Categories</option>
+          <option value="rice">Rice</option>
+          <option value="fast food">Fast Food</option>
+          <option value="italian">Italian</option>
+          <option value="snack">Snack</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>Max Price ($)</label>
+        <input id="search-price" type="number" placeholder="e.g. 15" oninput="filterRecipes()">
+      </div>
+      <div class="search-field">
+        <label>Min Rating</label>
+        <select id="search-rating" onchange="filterRecipes()">
+          <option value="0">Any Rating</option>
+          <option value="4">4+ ⭐</option>
+          <option value="4.5">4.5+ ⭐</option>
+          <option value="4.7">4.7+ ⭐</option>
+        </select>
+      </div>
+      <button class="search-btn" onclick="resetSearch()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <h2 class="page-title">All Recipes</h2>
+  <div class="card-container">
+
+    <div class="recipe-card-wrap" data-name="Biryani" data-category="Rice" data-price="12.99" data-rating="4.8">
+      <div class="card">
+        <img src="sources/biryani.jpg" alt="Biryani">
+        <div class="card-body">
+          <h3>Biryani</h3>
+          <div class="price">$12.99</div>
+          <p>Aromatic spiced rice dish ⭐ 4.8</p>
+          <div class="card-actions">
+            <button class="view-btn" onclick="showRecipe('Biryani')">Details</button>
+            <button class="add-cart-btn" onclick="addToCart('Biryani')">+ Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-card-wrap" data-name="Pizza" data-category="Fast Food" data-price="9.99" data-rating="4.5">
+      <div class="card">
+        <img src="sources/pizza.jpg" alt="Pizza">
+        <div class="card-body">
+          <h3>Pizza</h3>
+          <div class="price">$9.99</div>
+          <p>Crispy cheesy delight ⭐ 4.5</p>
+          <div class="card-actions">
+            <button class="view-btn" onclick="showRecipe('Pizza')">Details</button>
+            <button class="add-cart-btn" onclick="addToCart('Pizza')">+ Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-card-wrap" data-name="Burger" data-category="Fast Food" data-price="7.99" data-rating="4.6">
+      <div class="card">
+        <img src="sources/burger.jpg" alt="Burger">
+        <div class="card-body">
+          <h3>Burger</h3>
+          <div class="price">$7.99</div>
+          <p>Juicy fast food classic ⭐ 4.6</p>
+          <div class="card-actions">
+            <button class="view-btn" onclick="showRecipe('Burger')">Details</button>
+            <button class="add-cart-btn" onclick="addToCart('Burger')">+ Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-card-wrap" data-name="Pasta" data-category="Italian" data-price="10.99" data-rating="4.7">
+      <div class="card">
+        <img src="sources/pasta.jpg" alt="Pasta">
+        <div class="card-body">
+          <h3>Pasta</h3>
+          <div class="price">$10.99</div>
+          <p>Creamy Italian pasta ⭐ 4.7</p>
+          <div class="card-actions">
+            <button class="view-btn" onclick="showRecipe('Pasta')">Details</button>
+            <button class="add-cart-btn" onclick="addToCart('Pasta')">+ Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-card-wrap" data-name="Momos" data-category="Snack" data-price="6.99" data-rating="4.4">
+      <div class="card">
+        <img src="sources/momos.jpg" alt="Momos">
+        <div class="card-body">
+          <h3>Momos</h3>
+          <div class="price">$6.99</div>
+          <p>Steamed spicy dumplings ⭐ 4.4</p>
+          <div class="card-actions">
+            <button class="view-btn" onclick="showRecipe('Momos')">Details</button>
+            <button class="add-cart-btn" onclick="addToCart('Momos')">+ Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-card-wrap" data-name="Sandwich" data-category="Snack" data-price="5.99" data-rating="4.3">
+      <div class="card">
+        <img src="sources/sandwitch.jpg" alt="Sandwich">
+        <div class="card-body">
+          <h3>Sandwich</h3>
+          <div class="price">$5.99</div>
+          <p>Fresh creamy sandwich ⭐ 4.3</p>
+          <div class="card-actions">
+            <button class="view-btn" onclick="showRecipe('Sandwich')">Details</button>
+            <button class="add-cart-btn" onclick="addToCart('Sandwich')">+ Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="recipeModal">
+  <div class="modal">
+    <img class="modal-img" id="modal-img" src="" alt="">
+    <div class="modal-content">
+      <h2 id="modal-title"></h2>
+      <span class="modal-tag" id="modal-tag"></span>
+      <div class="modal-price" id="modal-price"></div>
+      <p class="desc" id="modal-desc"></p>
+      <h4>Ingredients</h4>
+      <ul id="modal-ingredients"></ul>
+      <h4>Instructions</h4>
+      <p class="desc" id="modal-steps"></p>
+      <div class="modal-actions">
+        <button class="modal-close" onclick="closeModal()">✕ Close</button>
+        <button class="modal-add-cart" id="modal-cart-btn">🛒 Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<footer>© 2026 RecipeHub – All Rights Reserved</footer>
+<script src="jsFile/jsFunctions.js"></script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – RecipeHub</title>
+  <link rel="stylesheet" href="../cssFile/globalStyles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav>
+  <h3>🍽 RecipeHub</h3>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <ul id="navMenu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html">Logout</a></li>
+    <li><a href="cart.html" class="nav-cart-btn">🛒 <span class="cart-badge"></span></a></li>
+  </ul>
+</nav>
+
+<div class="dashboard-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">🍽 RecipeHub</div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Main Menu</div>
+      <a href="dashboard.html" class="active"><span class="icon">📊</span> Dashboard</a>
+      <a href="recipes.html"><span class="icon">🍛</span> All Recipes</a>
+      <a href="cart.html"><span class="icon">🛒</span> Cart</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Stock Actions</div>
+      <a href="#" onclick="dashAction('add')"><span class="icon">➕</span> Add Recipe</a>
+      <a href="#" onclick="dashAction('update')"><span class="icon">✏️</span> Update Recipe</a>
+      <a href="#" onclick="dashAction('delete')"><span class="icon">🗑️</span> Delete Recipe</a>
+      <a href="recipes.html"><span class="icon">📋</span> View All Stock</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Reports</div>
+      <a href="#" onclick="showToast('📊 Generating report...')"><span class="icon">📈</span> Sales Report</a>
+      <a href="#" onclick="showToast('📧 Exporting data...')"><span class="icon">📤</span> Export Data</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Account</div>
+      <a href="register.html"><span class="icon">👤</span> Profile</a>
+      <a href="login.html"><span class="icon">🚪</span> Logout</a>
+    </div>
+  </aside>
+
+  <main class="dash-main">
+
+    <div class="dash-header">
+      <div>
+        <h2 class="dash-welcome-title">Welcome Back 👋</h2>
+        <p class="dash-welcome-sub">Here's what's happening with your RecipeHub today.</p>
+      </div>
+      <button class="submit-btn btn-header" onclick="dashAction('add')">➕ Add New Recipe</button>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Recipes</div>
+        <div class="stat-num">6</div>
+        <div class="stat-sub">↑ 2 this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Orders</div>
+        <div class="stat-num">48</div>
+        <div class="stat-sub">↑ 12% this month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Revenue</div>
+        <div class="stat-num">$384</div>
+        <div class="stat-sub">↑ 8% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg. Rating</div>
+        <div class="stat-num">4.5⭐</div>
+        <div class="stat-sub">Based on 48 orders</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Quick Actions</h3>
+    <div class="action-grid">
+      <a class="action-card" href="recipes.html">
+        <div class="action-icon icon-view">📋</div>
+        <div class="action-title">View All Stock</div>
+        <div class="action-desc">See all recipes in table</div>
+      </a>
+      <a class="action-card" href="#" onclick="dashAction('add')">
+        <div class="action-icon icon-add">➕</div>
+        <div class="action-title">Insert New Stock</div>
+        <div class="action-desc">Add a new recipe item</div>
+      </a>
+      <a class="action-card" href="#" onclick="dashAction('update')">
+        <div class="action-icon icon-edit">✏️</div>
+        <div class="action-title">Update Stock</div>
+        <div class="action-desc">Edit existing recipes</div>
+      </a>
+      <a class="action-card" href="#" onclick="dashAction('delete')">
+        <div class="action-icon icon-delete">🗑️</div>
+        <div class="action-title">Delete Stock</div>
+        <div class="action-desc">Remove a recipe item</div>
+      </a>
+      <a class="action-card" href="cart.html">
+        <div class="action-icon icon-cart">🛒</div>
+        <div class="action-title">View Cart</div>
+        <div class="action-desc">Check current orders</div>
+      </a>
+      <a class="action-card" href="../index.html">
+        <div class="action-icon icon-search">🔍</div>
+        <div class="action-title">Search Recipes</div>
+        <div class="action-desc">Filter by category/price</div>
+      </a>
+      <a class="action-card" href="#" onclick="showToast('📈 Report generated!')">
+        <div class="action-icon icon-report">📈</div>
+        <div class="action-title">Sales Report</div>
+        <div class="action-desc">View revenue graphs</div>
+      </a>
+      <a class="action-card" href="register.html">
+        <div class="action-icon icon-user">👤</div>
+        <div class="action-title">Manage Users</div>
+        <div class="action-desc">View user accounts</div>
+      </a>
+    </div>
+
+    <div class="dash-grid-2">
+      <div class="dash-box">
+        <div class="dash-box-title">📊 Recipes by Category</div>
+        <canvas id="categoryChart" height="200"></canvas>
+      </div>
+      <div class="dash-box">
+        <div class="dash-box-title">🛒 Orders by Recipe</div>
+        <canvas id="orderChart" height="200"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-wrap">
+      <h3>📈 Monthly Revenue ($)</h3>
+      <canvas id="revenueChart" height="100"></canvas>
+    </div>
+
+    <div class="dash-grid-2">
+      <div class="dash-box">
+        <div class="dash-box-title">
+          Recent Recipes
+          <a href="recipes.html">View All →</a>
+        </div>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img class="thumb" src="../sources/biryani.jpg" alt="Biryani"></td>
+              <td><strong>Biryani</strong></td>
+              <td>$12.99</td>
+              <td><span class="badge badge-green">Active</span></td>
+            </tr>
+            <tr>
+              <td><img class="thumb" src="../sources/pizza.jpg" alt="Pizza"></td>
+              <td><strong>Pizza</strong></td>
+              <td>$9.99</td>
+              <td><span class="badge badge-green">Active</span></td>
+            </tr>
+            <tr>
+              <td><img class="thumb" src="../sources/burger.jpg" alt="Burger"></td>
+              <td><strong>Burger</strong></td>
+              <td>$7.99</td>
+              <td><span class="badge badge-yellow">Low Stock</span></td>
+            </tr>
+            <tr>
+              <td><img class="thumb" src="../sources/pasta.jpg" alt="Pasta"></td>
+              <td><strong>Pasta</strong></td>
+              <td>$10.99</td>
+              <td><span class="badge badge-green">Active</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dash-box">
+        <div class="dash-box-title">📦 Stock Status</div>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Recipe</th>
+              <th>Stock</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Biryani</td><td>24 units</td><td><span class="badge badge-green">In Stock</span></td></tr>
+            <tr><td>Pizza</td><td>18 units</td><td><span class="badge badge-green">In Stock</span></td></tr>
+            <tr><td>Burger</td><td>3 units</td><td><span class="badge badge-red">Low Stock</span></td></tr>
+            <tr><td>Pasta</td><td>15 units</td><td><span class="badge badge-green">In Stock</span></td></tr>
+            <tr><td>Momos</td><td>0 units</td><td><span class="badge badge-red">Out of Stock</span></td></tr>
+            <tr><td>Sandwich</td><td>10 units</td><td><span class="badge badge-green">In Stock</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-content">
+      <h2>➕ Add New Recipe</h2>
+      <br>
+      <label>Recipe Name</label>
+      <input id="new-name" type="text" placeholder="e.g. Khichdi">
+
+      <label>Category</label>
+      <select id="new-cat">
+        <option value="">Select Category</option>
+        <option>Rice</option>
+        <option>Fast Food</option>
+        <option>Italian</option>
+        <option>Snack</option>
+        <option>Dumplings</option>
+      </select>
+
+      <div class="form-row">
+        <div>
+          <label>Cook Time</label>
+          <input id="new-time" type="text" placeholder="e.g. 30 min">
+        </div>
+        <div>
+          <label>Price ($)</label>
+          <input id="new-price" type="number" placeholder="e.g. 8.99">
+        </div>
+      </div>
+
+      <label>Description</label>
+      <textarea rows="3" placeholder="Brief description of the recipe..."></textarea>
+
+      <div class="modal-actions">
+        <button class="modal-close" onclick="closeModal()">Cancel</button>
+        <button class="modal-add-cart" onclick="submitNewRecipe()">✅ Save Recipe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="../jsFile/jsFunctions.js"></script>
+<script>
+  new Chart(document.getElementById("categoryChart"), {
+    type: "bar",
+    data: {
+      labels: ["Rice", "Fast Food", "Italian", "Snack", "Dumplings"],
+      datasets: [{
+        label: "Recipes",
+        data: [1, 2, 1, 2, 1],
+        backgroundColor: ["#7c3aed","#2563eb","#06b6d4","#10b981","#f59e0b"],
+        borderRadius: 8,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+    }
+  });
+
+  new Chart(document.getElementById("orderChart"), {
+    type: "doughnut",
+    data: {
+      labels: ["Biryani","Pizza","Burger","Pasta","Momos","Sandwich"],
+      datasets: [{
+        data: [15, 10, 9, 7, 4, 3],
+        backgroundColor: ["#7c3aed","#2563eb","#06b6d4","#10b981","#f59e0b","#ef4444"],
+        borderWidth: 2,
+        borderColor: "#fff"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: "bottom", labels: { font: { size: 11 } } } }
+    }
+  });
+
+  new Chart(document.getElementById("revenueChart"), {
+    type: "line",
+    data: {
+      labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+      datasets: [{
+        label: "Revenue ($)",
+        data: [120,180,150,240,200,310,280,350,300,384,420,390],
+        borderColor: "#7c3aed",
+        backgroundColor: "rgba(124,58,237,0.1)",
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: "#7c3aed",
+        pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: false } }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipes – RecipeHub</title>
+  <link rel="stylesheet" href="../cssFile/globalStyles.css">
+</head>
+<body>
+
+<nav>
+  <h3>🍽 RecipeHub</h3>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <ul id="navMenu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="cart.html" class="nav-cart-btn">🛒 <span class="cart-badge"></span></a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <h2 class="page-title">All Recipes</h2>
+
+  <div class="search-section search-section-full">
+    <h3>🔍 Filter Recipes</h3>
+    <div class="search-row">
+      <div class="search-field">
+        <label>Search by Name</label>
+        <input id="search-name" type="text" placeholder="e.g. Biryani..." oninput="filterRecipes()">
+      </div>
+      <div class="search-field">
+        <label>Category</label>
+        <select id="search-cat" onchange="filterRecipes()">
+          <option value="">All Categories</option>
+          <option value="rice">Rice</option>
+          <option value="fast food">Fast Food</option>
+          <option value="italian">Italian</option>
+          <option value="snack">Snack</option>
+          <option value="dumplings">Dumplings</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>Max Price ($)</label>
+        <input id="search-price" type="number" placeholder="e.g. 12" min="0" oninput="filterRecipes()">
+      </div>
+      <div class="search-field">
+        <label>Min Rating</label>
+        <select id="search-rating" onchange="filterRecipes()">
+          <option value="0">Any Rating</option>
+          <option value="4">4.0+ ⭐</option>
+          <option value="4.5">4.5+ ⭐</option>
+          <option value="4.7">4.7+ ⭐</option>
+        </select>
+      </div>
+      <button class="search-btn" onclick="resetSearch()">Reset</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Time</th>
+          <th>Price</th>
+          <th>Rating</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="recipe-row" data-name="Biryani" data-category="Rice" data-price="12.99" data-rating="4.8">
+          <td><img class="recipe-thumb" src="../sources/biryani.jpg" alt="Biryani"></td>
+          <td><strong>Biryani</strong></td>
+          <td><span class="badge badge-blue">Rice</span></td>
+          <td>40 min</td>
+          <td><strong>$12.99</strong></td>
+          <td class="rating">⭐ 4.8</td>
+          <td>
+            <button class="tbl-btn btn-view"   onclick="showRecipe('Biryani')">View</button>
+            <button class="tbl-btn btn-edit"   onclick="showToast('✏️ Edit Biryani...')">Edit</button>
+            <button class="tbl-btn btn-delete" onclick="showToast('🗑️ Deleted Biryani!')">Delete</button>
+            <button class="tbl-btn btn-cart"   onclick="addToCart('Biryani')">+ Cart</button>
+          </td>
+        </tr>
+        <tr class="recipe-row" data-name="Pizza" data-category="Fast Food" data-price="9.99" data-rating="4.5">
+          <td><img class="recipe-thumb" src="../sources/pizza.jpg" alt="Pizza"></td>
+          <td><strong>Pizza</strong></td>
+          <td><span class="badge badge-yellow">Fast Food</span></td>
+          <td>30 min</td>
+          <td><strong>$9.99</strong></td>
+          <td class="rating">⭐ 4.5</td>
+          <td>
+            <button class="tbl-btn btn-view"   onclick="showRecipe('Pizza')">View</button>
+            <button class="tbl-btn btn-edit"   onclick="showToast('✏️ Edit Pizza...')">Edit</button>
+            <button class="tbl-btn btn-delete" onclick="showToast('🗑️ Deleted Pizza!')">Delete</button>
+            <button class="tbl-btn btn-cart"   onclick="addToCart('Pizza')">+ Cart</button>
+          </td>
+        </tr>
+        <tr class="recipe-row" data-name="Burger" data-category="Fast Food" data-price="7.99" data-rating="4.6">
+          <td><img class="recipe-thumb" src="../sources/burger.jpg" alt="Burger"></td>
+          <td><strong>Burger</strong></td>
+          <td><span class="badge badge-yellow">Fast Food</span></td>
+          <td>20 min</td>
+          <td><strong>$7.99</strong></td>
+          <td class="rating">⭐ 4.6</td>
+          <td>
+            <button class="tbl-btn btn-view"   onclick="showRecipe('Burger')">View</button>
+            <button class="tbl-btn btn-edit"   onclick="showToast('✏️ Edit Burger...')">Edit</button>
+            <button class="tbl-btn btn-delete" onclick="showToast('🗑️ Deleted Burger!')">Delete</button>
+            <button class="tbl-btn btn-cart"   onclick="addToCart('Burger')">+ Cart</button>
+          </td>
+        </tr>
+        <tr class="recipe-row" data-name="Pasta" data-category="Italian" data-price="10.99" data-rating="4.7">
+          <td><img class="recipe-thumb" src="../sources/pasta.jpg" alt="Pasta"></td>
+          <td><strong>Pasta</strong></td>
+          <td><span class="badge badge-green">Italian</span></td>
+          <td>25 min</td>
+          <td><strong>$10.99</strong></td>
+          <td class="rating">⭐ 4.7</td>
+          <td>
+            <button class="tbl-btn btn-view"   onclick="showRecipe('Pasta')">View</button>
+            <button class="tbl-btn btn-edit"   onclick="showToast('✏️ Edit Pasta...')">Edit</button>
+            <button class="tbl-btn btn-delete" onclick="showToast('🗑️ Deleted Pasta!')">Delete</button>
+            <button class="tbl-btn btn-cart"   onclick="addToCart('Pasta')">+ Cart</button>
+          </td>
+        </tr>
+        <tr class="recipe-row" data-name="Momos" data-category="Snack" data-price="6.99" data-rating="4.4">
+          <td><img class="recipe-thumb" src="../sources/momos.jpg" alt="Momos"></td>
+          <td><strong>Momos</strong></td>
+          <td><span class="badge badge-blue">Snack</span></td>
+          <td>35 min</td>
+          <td><strong>$6.99</strong></td>
+          <td class="rating">⭐ 4.4</td>
+          <td>
+            <button class="tbl-btn btn-view"   onclick="showRecipe('Momos')">View</button>
+            <button class="tbl-btn btn-edit"   onclick="showToast('✏️ Edit Momos...')">Edit</button>
+            <button class="tbl-btn btn-delete" onclick="showToast('🗑️ Deleted Momos!')">Delete</button>
+            <button class="tbl-btn btn-cart"   onclick="addToCart('Momos')">+ Cart</button>
+          </td>
+        </tr>
+        <tr class="recipe-row" data-name="Sandwich" data-category="Snack" data-price="5.99" data-rating="4.3">
+          <td><img class="recipe-thumb" src="../sources/sandwitch.jpg" alt="Sandwich"></td>
+          <td><strong>Sandwich</strong></td>
+          <td><span class="badge badge-blue">Snack</span></td>
+          <td>10 min</td>
+          <td><strong>$5.99</strong></td>
+          <td class="rating">⭐ 4.3</td>
+          <td>
+            <button class="tbl-btn btn-view"   onclick="showRecipe('Sandwich')">View</button>
+            <button class="tbl-btn btn-edit"   onclick="showToast('✏️ Edit Sandwich...')">Edit</button>
+            <button class="tbl-btn btn-delete" onclick="showToast('🗑️ Deleted Sandwich!')">Delete</button>
+            <button class="tbl-btn btn-cart"   onclick="addToCart('Sandwich')">+ Cart</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal-overlay" id="recipeModal">
+  <div class="modal">
+    <img class="modal-img" id="modal-img" src="" alt="">
+    <div class="modal-content">
+      <h2 id="modal-title"></h2>
+      <span class="modal-tag" id="modal-tag"></span>
+      <div class="modal-price" id="modal-price"></div>
+      <p class="desc" id="modal-desc"></p>
+      <h4>Ingredients</h4>
+      <ul id="modal-ingredients"></ul>
+      <h4>Instructions</h4>
+      <p class="desc" id="modal-steps"></p>
+      <div class="modal-actions">
+        <button class="modal-close" onclick="closeModal()">✕ Close</button>
+        <button class="modal-add-cart" id="modal-cart-btn">🛒 Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<footer>© 2026 RecipeHub</footer>
+<script src="../jsFile/jsFunctions.js"></script>
+</body>
+</html>
